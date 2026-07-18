@@ -2,6 +2,7 @@ import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar, Sidebar } from "@/src/components/layout";
+import { GananciasProvider } from "@/src/context/GananciasContext"; // ✅ agregado
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -28,11 +29,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <Navbar />
-        <div className="mx-auto flex max-w-6xl">
-          <Sidebar />
-          <main className="min-w-0 flex-1 px-4 py-8 md:px-8">{children}</main>
-        </div>
+        <GananciasProvider> {/* ✅ agregado */}
+          <Navbar />
+          <div className="mx-auto flex max-w-6xl">
+            <Sidebar />
+            <main className="min-w-0 flex-1 px-4 py-8 md:px-8">
+              {children}
+            </main>
+          </div>
+        </GananciasProvider> {/* ✅ agregado */}
       </body>
     </html>
   );
