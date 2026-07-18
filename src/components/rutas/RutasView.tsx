@@ -9,31 +9,51 @@ import { rutasDeHoy } from "./rutasData";
 
 export default function RutasView() {
   const [seleccionadaId, setSeleccionadaId] = useState(rutasDeHoy[0].id);
+
   const rutaSeleccionada =
     rutasDeHoy.find((r) => r.id === seleccionadaId) ?? rutasDeHoy[0];
 
   return (
-    <div className="flex flex-col gap-6">
-      <div>
-        <h1 className="text-2xl font-bold tracking-tight sm:text-3xl">Rutas</h1>
-        <p className="text-sm text-muted">
-          Consulta tus rutas del día y su detalle.
-        </p>
+    <div className="flex flex-col gap-8">
+
+      {/* Encabezado */}
+      <div className="flex flex-col gap-4 lg:flex-row lg:items-center lg:justify-between">
+        <div>
+          <h1 className="text-3xl font-bold text-slate-800 dark:text-white">
+            Gestión de Rutas
+          </h1>
+
+          <p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+            Consulta las rutas asignadas, revisa su recorrido y administra el
+            estado de cada viaje.
+          </p>
+        </div>
+
+        <div className="w-full lg:w-80">
+          <input
+            type="text"
+            placeholder="🔍 Buscar ruta..."
+            className="w-full rounded-xl border border-gray-300 bg-white px-4 py-3 shadow-sm outline-none transition focus:border-green-600 dark:border-slate-700 dark:bg-slate-900"
+          />
+        </div>
       </div>
 
-      <div className="grid gap-6 lg:grid-cols-2">
-        {/* Rutas de Hoy */}
-        <Card>
+      {/* Contenido principal */}
+      <div className="grid gap-6 xl:grid-cols-[380px_1fr]">
+
+        {/* Lista de rutas */}
+        <Card className="shadow-md">
           <CardHeader
-            titulo="Rutas de Hoy"
-            icono="🗺️"
+            titulo="Rutas Disponibles"
+            icono="🚚"
             accion={
-              <span className="rounded-full bg-brand-soft px-2 py-0.5 text-xs font-semibold text-brand">
+              <span className="rounded-full bg-green-100 px-3 py-1 text-xs font-semibold text-green-700">
                 {rutasDeHoy.length}
               </span>
             }
           />
-          <CardBody className="flex flex-col gap-3">
+
+          <CardBody className="flex flex-col gap-4">
             {rutasDeHoy.map((ruta) => (
               <RutaCard
                 key={ruta.id}
@@ -45,11 +65,11 @@ export default function RutasView() {
           </CardBody>
         </Card>
 
-        {/* Detalle de la ruta seleccionada */}
+        {/* Detalle */}
         <RutaDetalle ruta={rutaSeleccionada} />
       </div>
 
-      {/* Historial de Rutas */}
+      {/* Historial */}
       <HistorialRutas />
     </div>
   );
