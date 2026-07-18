@@ -1,5 +1,12 @@
-import EnviosList from "@/src/components/envios/EnviosList";
+"use client";
+
+import EnviosView from "@/src/components/envios/EnviosView";
+
 
 export default function EnviosPage() {
-  return <EnviosList />;
+
+  return (
+    <EnviosView />
+  );
+
 }

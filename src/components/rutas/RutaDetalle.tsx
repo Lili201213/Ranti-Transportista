@@ -1,6 +1,11 @@
 import { Card, CardHeader, CardBody } from "@/src/components/ui/Card";
 import { Badge } from "@/src/components/ui/Badge";
 import { estadoRutaConfig, type Ruta } from "./rutasData";
+import dynamic from "next/dynamic";
+
+const RutaMapa = dynamic(() => import("./RutaMapa"), {
+  ssr: false,
+});
 
 type RutaDetalleProps = {
   ruta: Ruta;
@@ -37,21 +42,37 @@ export default function RutaDetalle({ ruta }: RutaDetalleProps) {
       />
       <CardBody className="flex flex-col gap-5">
         <div>
-          <h3 className="flex items-center gap-2 text-lg font-bold">
-            {ruta.origen}
-            <span className="text-brand" aria-hidden>
-              →
-            </span>
-            {ruta.destino}
-          </h3>
+          <h3 className="flex items-center gap-2 text-2xl font-bold text-slate-800 dark:text-white">
+  {ruta.origen}
+  <span className="text-green-600" aria-hidden>
+    →
+  </span>
+  {ruta.destino}
+</h3>
+
+<p className="mt-2 text-sm text-slate-500 dark:text-slate-400">
+  Información completa del recorrido seleccionado.
+</p>
+          
         </div>
+
+        {/* Mapa */}
+<section className="flex flex-col gap-3">
+  <h4 className="text-sm font-semibold text-slate-600 dark:text-slate-300">
+    🗺️ Mapa de la Ruta
+  </h4>
+
+  <div className="overflow-hidden rounded-2xl shadow-md">
+  <RutaMapa />
+</div>
+</section>
 
         {/* Información del viaje */}
         <section className="flex flex-col gap-2">
           <h4 className="text-sm font-semibold text-muted">
             Información del viaje
           </h4>
-          <div className="grid grid-cols-2 gap-2 sm:grid-cols-3">
+          <div className="grid gap-4 md:grid-cols-2 xl:grid-cols-3">
             <InfoItem icono="📏" etiqueta="Distancia" valor={ruta.distancia} />
             <InfoItem icono="⏱️" etiqueta="Duración" valor={ruta.duracion} />
             <InfoItem icono="📍" etiqueta="Paradas" valor={`${ruta.paradas}`} />
@@ -123,7 +144,7 @@ export default function RutaDetalle({ ruta }: RutaDetalleProps) {
         <button
           type="button"
           disabled={ruta.estado === "completada"}
-          className="mt-1 w-full rounded-xl bg-brand py-3 text-sm font-semibold text-brand-foreground transition-transform hover:scale-[1.01] disabled:cursor-not-allowed disabled:opacity-50"
+          className="mt-4 w-full rounded-xl bg-green-600 py-3 text-base font-semibold text-white shadow-lg transition-all hover:bg-green-700 hover:shadow-xl disabled:cursor-not-allowed disabled:opacity-50"
         >
           {ruta.estado === "en_curso"
             ? "Continuar Ruta"
