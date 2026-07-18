@@ -1,13 +1,19 @@
+"use client";
+import { useGanancias } from "@/src/context/GananciasContext";
+
 export default function GananciasResumen() {
+  const { total } = useGanancias();
+
   return (
-    <section className="flex flex-col gap-6">
-      <h2 className="text-2xl font-bold">Ganancias</h2>
-      <p className="text-foreground/70">
-        Aquí se mostrará el resumen de tus ingresos y pagos.
-      </p>
-      <div className="rounded-xl border border-dashed border-black/15 p-10 text-center text-foreground/50 dark:border-white/15">
-        Sin datos de ganancias aún.
+    <div className="p-6">
+      <h1 className="text-3xl font-bold">Ganancias</h1>
+
+      <div className="mt-4 bg-green-100 p-6 rounded-xl">
+        <p className="text-lg">Total ganado</p>
+        <h2 className="text-3xl font-bold text-green-700">
+          S/ {total}
+        </h2>
       </div>
-    </section>
+    </div>
   );
 }

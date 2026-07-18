@@ -1,7 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar } from "@/src/components/layout";
+import { Navbar, Sidebar } from "@/src/components/layout";
+import { GananciasProvider } from "@/src/context/GananciasContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -29,11 +30,15 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <Navbar />
-
-        <main className="min-h-screen w-full px-4 py-8 md:px-8">
-          {children}
-        </main>
+        <GananciasProvider>
+          <Navbar />
+          <div className="mx-auto flex max-w-6xl">
+            <Sidebar />
+            <main className="min-w-0 flex-1 px-4 py-8 md:px-8">
+              {children}
+            </main>
+          </div>
+        </GananciasProvider>
       </body>
     </html>
   );

@@ -1,52 +1,65 @@
+"use client";
+import { useState } from "react";
+import { entregasIniciales } from "./entregasData";
+import EntregaCard from "./EntregaCard";
+import { useGanancias } from "@/src/context/GananciasContext";
+
 export default function EntregasList() {
-  const entregas = [
-    {
-      id: 1,
-      producto: "Papa",
-      cliente: "Cliente Coracora",
-      ruta: "Coracora → Puquio",
-      estado: "En tránsito",
-    },
-    {
-      id: 2,
-      producto: "Ganado",
-      cliente: "Cliente Pauza",
-      ruta: "Coracora → Pauza",
-      estado: "Entregado",
-    },
-  ];
+  const [entregas, setEntregas] = useState(entregasIniciales);
+  const [filtro, setFiltro] = useState("Todos");
+
+  const { agregarGanancia } = useGanancias(); // ✅ USAR CONTEXTO
+
+  // cambiar estado + sumar dinero
+  const marcarEntregado = (id: number) => {
+    const nuevas = entregas.map((e) => {
+      if (e.id === id && e.estado !== "Entregado") {
+        agregarGanancia(e.monto); // 💰 SUMA GANANCIA
+        return { ...e, estado: "Entregado" };
+      }
+      return e;
+    });
+
+    setEntregas(nuevas);
+  };
+
+  // filtrar
+  const entregasFiltradas =
+    filtro === "Todos"
+      ? entregas
+      : entregas.filter((e) => e.estado === filtro);
 
   return (
-    <section className="flex flex-col gap-6">
-      <h1 className="text-3xl font-bold">
-        Entregas
-      </h1>
+    <div className="p-6">
+      <h1 className="text-3xl font-bold mb-4">Mis Entregas</h1>
 
-      <div className="grid gap-5">
-        {entregas.map((entrega) => (
-          <div
-            key={entrega.id}
-            className="rounded-xl border p-5 shadow-sm"
+      {/* FILTROS */}
+      <div className="flex gap-3 mb-6">
+        {["Todos", "Pendiente", "Entregado"].map((f) => (
+          <button
+            key={f}
+            onClick={() => setFiltro(f)}
+            className={`px-4 py-2 rounded-lg ${
+              filtro === f
+                ? "bg-blue-600 text-white"
+                : "bg-gray-200"
+            }`}
           >
-            <h2 className="text-xl font-semibold">
-              {entrega.producto}
-            </h2>
-
-            <p>Cliente: {entrega.cliente}</p>
-            <p>Ruta: {entrega.ruta}</p>
-            <p>Estado: {entrega.estado}</p>
-
-            <div className="mt-4">
-              <a
-                href={`/entregas/${entrega.id}`}
-                className="rounded-lg bg-blue-600 px-4 py-2 text-white"
-              >
-                Ver detalle
-              </a>
-            </div>
-          </div>
+            {f}
+          </button>
         ))}
       </div>
-    </section>
+
+      {/* LISTA */}
+      <div className="grid md:grid-cols-2 gap-4">
+        {entregasFiltradas.map((entrega) => (
+          <EntregaCard
+            key={entrega.id}
+            entrega={entrega}
+            marcarEntregado={marcarEntregado}
+          />
+        ))}
+      </div>
+    </div>
   );
 }
