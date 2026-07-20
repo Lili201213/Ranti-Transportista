@@ -20,7 +20,7 @@ import {
 
 
 // Corrección de iconos de Leaflet en Next.js
-delete L.Icon.Default.prototype._getIconUrl;
+delete (L.Icon.Default.prototype as any)._getIconUrl;
 
 L.Icon.Default.mergeOptions({
 
@@ -36,62 +36,44 @@ L.Icon.Default.mergeOptions({
 });
 
 
-
 export default function MapaEnvio() {
-
 
   const origen: [number, number] = [
     -15.327,
     -73.572
   ];
 
-
   const destino: [number, number] = [
     -14.831,
     -74.938
   ];
 
-
-
   return (
 
     <Card>
-
 
       <CardHeader
         titulo="Ruta del Envío"
         icono="🗺️"
       />
 
-
       <CardBody>
-
 
         <div className="overflow-hidden rounded-xl border border-border">
 
-
           <MapContainer
-
             center={origen}
-
             zoom={9}
-
             style={{
               height: "400px",
               width: "100%"
             }}
-
           >
 
-
             <TileLayer
-
               url="https://tile.openstreetmap.org/{z}/{x}/{y}.png"
-
               attribution="&copy; OpenStreetMap contributors"
-
             />
-
 
             <Marker position={origen}>
               <Popup>
@@ -99,13 +81,11 @@ export default function MapaEnvio() {
               </Popup>
             </Marker>
 
-
             <Marker position={destino}>
               <Popup>
                 🎯 Destino: Nazca
               </Popup>
             </Marker>
-
 
             <Polyline
               positions={[
@@ -114,15 +94,11 @@ export default function MapaEnvio() {
               ]}
             />
 
-
           </MapContainer>
-
 
         </div>
 
-
       </CardBody>
-
 
     </Card>
 
