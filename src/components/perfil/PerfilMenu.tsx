@@ -1,101 +1,71 @@
+
 import Link from "next/link";
+import { Card, CardHeader, CardBody } from "@/src/components/ui/Card";
+
+const opciones = [
+  {
+    titulo: "Mis Datos",
+    descripcion: "Consulta y edita tu información personal.",
+    icono: "👤",
+    ruta: "/informacion",
+  },
+  {
+    titulo: "Mi Vehículo",
+    descripcion: "Consulta la información de tu vehículo.",
+    icono: "🚚",
+    ruta: "/vehiculo",
+  },
+  {
+    titulo: "Ganancias",
+    descripcion: "Revisa tus ingresos diarios y mensuales.",
+    icono: "💰",
+    ruta: "/ganancias",
+  },
+  {
+    titulo: "Configuración",
+    descripcion: "Preferencias y ajustes de la cuenta.",
+    icono: "⚙️",
+    ruta: "/configuracion",
+  },
+];
 
 export default function PerfilMenu() {
   return (
     <div className="grid gap-6 md:grid-cols-2">
 
-      <Link
-        href="/informacion"
-        className="rounded-2xl bg-white p-8 shadow transition hover:-translate-y-1 hover:shadow-xl"
-      >
-        <div className="flex items-center justify-between">
+      {opciones.map((opcion) => (
+        <Link
+          key={opcion.titulo}
+          href={opcion.ruta}
+          className="transition hover:-translate-y-1"
+        >
 
-          <div>
-            <div className="text-5xl">👤</div>
+          <Card className="h-full hover:shadow-xl">
 
-            <h2 className="mt-4 text-2xl font-bold text-gray-800">
-              Mis Datos
-            </h2>
+            <CardHeader
+              titulo={opcion.titulo}
+              icono={opcion.icono}
+              accion={
+                <span className="text-3xl text-gray-400">
+                  →
+                </span>
+              }
+            />
 
-            <p className="mt-2 text-gray-500">
-              Consulta y edita tu información personal.
-            </p>
-          </div>
+            <CardBody>
 
-          <span className="text-3xl text-gray-400">→</span>
+              <p className="text-gray-500">
+                {opcion.descripcion}
+              </p>
 
-        </div>
-      </Link>
+            </CardBody>
 
-      <Link
-        href="/vehiculo"
-        className="rounded-2xl bg-white p-8 shadow transition hover:-translate-y-1 hover:shadow-xl"
-      >
-        <div className="flex items-center justify-between">
+          </Card>
 
-          <div>
-            <div className="text-5xl">🚚</div>
-
-            <h2 className="mt-4 text-2xl font-bold text-gray-800">
-              Mi Vehículo
-            </h2>
-
-            <p className="mt-2 text-gray-500">
-              Consulta la información de tu vehículo.
-            </p>
-          </div>
-
-          <span className="text-3xl text-gray-400">→</span>
-
-        </div>
-      </Link>
-
-      <Link
-        href="/ganancias"
-        className="rounded-2xl bg-white p-8 shadow transition hover:-translate-y-1 hover:shadow-xl"
-      >
-        <div className="flex items-center justify-between">
-
-          <div>
-            <div className="text-5xl">💰</div>
-
-            <h2 className="mt-4 text-2xl font-bold text-gray-800">
-              Ganancias
-            </h2>
-
-            <p className="mt-2 text-gray-500">
-              Revisa tus ingresos diarios y mensuales.
-            </p>
-          </div>
-
-          <span className="text-3xl text-gray-400">→</span>
-
-        </div>
-      </Link>
-
-      <Link
-        href="/configuracion"
-        className="rounded-2xl bg-white p-8 shadow transition hover:-translate-y-1 hover:shadow-xl"
-      >
-        <div className="flex items-center justify-between">
-
-          <div>
-            <div className="text-5xl">⚙️</div>
-
-            <h2 className="mt-4 text-2xl font-bold text-gray-800">
-              Configuración
-            </h2>
-
-            <p className="mt-2 text-gray-500">
-              Preferencias y ajustes de la cuenta.
-            </p>
-          </div>
-
-          <span className="text-3xl text-gray-400">→</span>
-
-        </div>
-      </Link>
+        </Link>
+      ))}
 
     </div>
   );
 }
+
