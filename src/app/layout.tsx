@@ -31,7 +31,6 @@ export default function RootLayout({
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
         <GananciasProvider>
-
           <Navbar />
 
           <main className="min-h-screen w-full px-4 py-8 md:px-8">
