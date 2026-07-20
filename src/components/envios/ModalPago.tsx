@@ -52,7 +52,7 @@ export default function ModalPago({
 
   return (
 
-    <div className="fixed inset-0 bg-black/50 flex items-center justify-center">
+    <div className="fixed inset-0 z-50 flex items-center justify-center bg-black/50">
 
 
       <div className="bg-white text-gray-900 rounded-xl p-6 w-96 shadow-xl">
