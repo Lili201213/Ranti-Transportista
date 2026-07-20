@@ -1,7 +1,7 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Sidebar } from "@/src/components/layout";
+import { Navbar } from "@/src/components/layout";
 import { GananciasProvider } from "@/src/context/GananciasContext";
 
 const geistSans = Geist({
@@ -32,15 +32,11 @@ export default function RootLayout({
       >
         <GananciasProvider>
 
-          <div className="mx-auto flex max-w-6xl">
+          <Navbar />
 
-            <Sidebar />
-
-            <main className="min-w-0 flex-1 px-4 py-8 md:px-8">
-              {children}
-            </main>
-
-          </div>
+          <main className="min-h-screen w-full px-4 py-8 md:px-8">
+            {children}
+          </main>
 
         </GananciasProvider>
       </body>
