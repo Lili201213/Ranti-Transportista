@@ -1,8 +1,8 @@
 import type { Metadata } from "next";
 import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
-import { Navbar, Sidebar } from "@/src/components/layout";
-import { GananciasProvider } from "@/src/context/GananciasContext"; // ✅ agregado
+import { Navbar } from "@/src/components/layout";
+import { GananciasProvider } from "@/src/context/GananciasContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -16,7 +16,8 @@ const geistMono = Geist_Mono({
 
 export const metadata: Metadata = {
   title: "Ranti Transportista",
-  description: "Panel de gestión para transportistas: rutas, envíos, entregas, ganancias y perfil.",
+  description:
+    "Panel de gestión para transportistas: rutas, envíos, entregas, ganancias y perfil.",
 };
 
 export default function RootLayout({
@@ -29,15 +30,13 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <GananciasProvider> {/* ✅ agregado */}
+        <GananciasProvider>
           <Navbar />
-          <div className="mx-auto flex max-w-6xl">
-            <Sidebar />
-            <main className="min-w-0 flex-1 px-4 py-8 md:px-8">
-              {children}
-            </main>
-          </div>
-        </GananciasProvider> {/* ✅ agregado */}
+
+          <main className="min-h-screen w-full px-4 py-8 md:px-8">
+            {children}
+          </main>
+        </GananciasProvider>
       </body>
     </html>
   );
