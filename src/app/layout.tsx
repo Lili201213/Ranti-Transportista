@@ -36,7 +36,6 @@ export default function RootLayout({
           <main className="min-h-screen w-full px-4 py-8 md:px-8">
             {children}
           </main>
-
         </GananciasProvider>
       </body>
     </html>
