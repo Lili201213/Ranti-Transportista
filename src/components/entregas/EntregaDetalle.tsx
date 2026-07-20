@@ -1,36 +1,64 @@
 "use client";
 
-import { useRouter } from "next/navigation";
-import { entregasIniciales } from "./entregasData";
+import MapaEntrega from "./mapa/MapaEntrega";
 
-export default function EntregaDetalle({ id }: { id: string }) {
-  const router = useRouter();
-
-  const entrega = entregasIniciales.find(
-    (e) => e.id === Number(id)
-  );
-
-  if (!entrega) return <p>Entrega no encontrada</p>;
-
+export default function EntregaDetalle({
+  entrega,
+}: any) {
   return (
-    <div className="p-6">
+    <div className="mt-8 bg-white rounded-2xl shadow-md p-6 border">
 
-      {/* BOTÓN VOLVER */}
-      <button
-        onClick={() => router.back()}
-        className="mb-4 bg-gray-200 px-4 py-2 rounded-lg"
-      >
-        ← Volver
-      </button>
-
-      <h2 className="text-2xl font-bold mb-4">
-        Detalle de Entrega
+      <h2 className="text-2xl font-bold mb-6">
+        📋 Detalle de Entrega
       </h2>
 
-      <p><strong>Cliente:</strong> {entrega.cliente}</p>
-      <p><strong>Dirección:</strong> {entrega.direccion}</p>
-      <p><strong>Estado:</strong> {entrega.estado}</p>
-      <p><strong>Monto:</strong> S/ {entrega.monto}</p>
+      <div className="grid md:grid-cols-2 gap-4 text-gray-700">
+
+        <p>
+          👤 <strong>Cliente:</strong> {entrega.cliente}
+        </p>
+
+        <p>
+          📍 <strong>Dirección:</strong> {entrega.direccion}
+        </p>
+
+        <p>
+          📦 <strong>Producto:</strong> {entrega.producto}
+        </p>
+
+        <p>
+          ⚖️ <strong>Carga:</strong> {entrega.carga}
+        </p>
+
+        <p>
+          🚚 <strong>Ruta:</strong> {entrega.origen} → {entrega.destino}
+        </p>
+
+        <p>
+          🚦 <strong>Estado:</strong> {entrega.estado}
+        </p>
+
+        <p>
+          📌 <strong>Ubicación:</strong> {entrega.ubicacion}
+        </p>
+
+        <p>
+          💰 <strong>Monto:</strong>{" "}
+          <span className="text-green-600 font-bold">
+            S/ {entrega.monto}
+          </span>
+        </p>
+
+      </div>
+
+      {/* MAPA */}
+      <MapaEntrega />
+
+      <button
+        className="mt-6 w-full bg-green-600 text-white py-3 rounded-xl font-semibold"
+      >
+        Confirmar entrega
+      </button>
 
     </div>
   );
