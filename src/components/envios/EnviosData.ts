@@ -4,12 +4,10 @@ export type EstadoEnvio =
   | "en_camino"
   | "entregado";
 
-
 export type MetodoPago =
   | "Yape"
   | "Efectivo"
   | "Tarjeta";
-
 
 export type Envio = {
   id: string;
@@ -23,12 +21,10 @@ export type Envio = {
   peso: string;
   precio: string;
   estado: EstadoEnvio;
+  imagen: string;
 };
 
-
-
 export const envios: Envio[] = [
-
   {
     id: "ENV-001",
     cliente: "Juan Pérez",
@@ -41,8 +37,8 @@ export const envios: Envio[] = [
     peso: "18 kg",
     precio: "S/ 95.00",
     estado: "pendiente",
+    imagen: "/images/envios/papa.jpg",
   },
-
 
   {
     id: "ENV-002",
@@ -56,8 +52,8 @@ export const envios: Envio[] = [
     peso: "8 kg",
     precio: "S/ 60.00",
     estado: "aceptado",
+    imagen: "/images/envios/queso.jpg",
   },
-
 
   {
     id: "ENV-003",
@@ -71,6 +67,54 @@ export const envios: Envio[] = [
     peso: "25 kg",
     precio: "S/ 140.00",
     estado: "en_camino",
-  }
+    imagen: "/images/envios/frutas.jpg",
+  },
 
+
+  {
+    id: "ENV-012",
+    cliente: "Marco Gutiérrez",
+    telefono: "944112233",
+    origen: "Puquio",
+    destino: "Pauza",
+    direccion: "Jr. Ayacucho 410",
+    fecha: "21/07/2026",
+    hora: "04:00 PM",
+    peso: "20 kg",
+    precio: "S/ 110.00",
+    estado: "entregado",
+    imagen: "/images/envios/queso.jpg",
+  },
+
+  {
+    id: "ENV-011",
+    cliente: "Elena Vargas",
+    telefono: "955678123",
+    origen: "Puquio",
+    destino: "Nazca",
+    direccion: "Av. Libertad 330",
+    fecha: "21/07/2026",
+    hora: "01:15 PM",
+    peso: "24 kg",
+    precio: "S/ 145.00",
+    estado: "aceptado",
+    imagen: "/images/envios/frutas.jpg",
+  },
+
+
+
+  {
+    id: "ENV-009",
+    cliente: "Lucía Salas",
+    telefono: "943215678",
+    origen: "Nazca",
+    destino: "Puquio",
+    direccion: "Av. Principal 560",
+    fecha: "20/07/2026",
+    hora: "03:30 PM",
+    peso: "18 kg",
+    precio: "S/ 120.00",
+    estado: "en_camino",
+    imagen: "/images/envios/queso.jpg",
+  },
 ];
