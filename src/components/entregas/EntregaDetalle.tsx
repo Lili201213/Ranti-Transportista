@@ -1,5 +1,6 @@
 "use client";
 
+import Link from "next/link";
 import MapaEntrega from "./mapa/MapaEntrega";
 import { Card, CardHeader, CardBody } from "@/src/components/ui/Card";
 
@@ -16,7 +17,7 @@ export default function EntregaDetalle({
 
       <CardBody>
 
-        <div className="grid md:grid-cols-2 gap-4 text-gray-700">
+        <div className="grid gap-4 text-gray-700 md:grid-cols-2">
 
           <p>
             👤 <strong>Cliente:</strong> {entrega.cliente}
@@ -51,7 +52,7 @@ export default function EntregaDetalle({
 
           <p>
             💰 <strong>Monto:</strong>{" "}
-            <span className="text-green-600 font-bold">
+            <span className="font-bold text-green-600">
               S/ {entrega.monto}
             </span>
           </p>
@@ -65,11 +66,14 @@ export default function EntregaDetalle({
         </div>
 
 
-        <button
-          className="mt-6 w-full bg-green-600 text-white py-3 rounded-xl font-semibold hover:bg-green-700"
+        {/* CONFIRMAR ENTREGA */}
+        <Link
+          href={`/confirmar-entrega?id=${entrega.id}`}
+          className="mt-6 block w-full rounded-xl bg-green-600 py-3 text-center font-semibold text-white transition hover:bg-green-700"
         >
           Confirmar entrega
-        </button>
+        </Link>
+
 
       </CardBody>
 

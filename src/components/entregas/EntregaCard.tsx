@@ -63,14 +63,7 @@ export default function EntregaCard({
             Ver detalle
           </button>
 
-          {entrega.estado === "Pendiente" && (
-            <button
-              onClick={() => marcarEntregado(entrega.id)}
-              className="flex-1 bg-green-600 text-white py-2 rounded-lg hover:bg-green-700"
-            >
-              Entregado
-            </button>
-          )}
+          
 
         </div>
 

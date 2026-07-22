@@ -3,6 +3,7 @@ import { Geist, Geist_Mono } from "next/font/google";
 import "./globals.css";
 import { Navbar } from "@/src/components/layout";
 import { GananciasProvider } from "@/src/context/GananciasContext";
+import { EntregasProvider } from "@/src/context/EntregasContext";
 
 const geistSans = Geist({
   variable: "--font-geist-sans",
@@ -30,13 +31,19 @@ export default function RootLayout({
       <body
         className={`${geistSans.variable} ${geistMono.variable} antialiased min-h-screen`}
       >
-        <GananciasProvider>
-          <Navbar />
+       <GananciasProvider>
 
-          <main className="min-h-screen w-full px-4 py-8 md:px-8">
-            {children}
-          </main>
-        </GananciasProvider>
+  <EntregasProvider>
+
+    <Navbar />
+
+    <main className="min-h-screen w-full px-4 py-8 md:px-8">
+      {children}
+    </main>
+
+  </EntregasProvider>
+
+</GananciasProvider>
       </body>
     </html>
   );
