@@ -1,5 +1,10 @@
-import ConfirmarEntrega from "@/src/components/confirmarEntrega/ConfirmarEntrega"
+import { Suspense } from "react";
+import ConfirmarEntrega from "@/src/components/confirmarEntrega/ConfirmarEntrega";
 
 export default function Page() {
-  return <ConfirmarEntrega />;
+  return (
+    <Suspense fallback={<div>Cargando entrega...</div>}>
+      <ConfirmarEntrega />
+    </Suspense>
+  );
 }

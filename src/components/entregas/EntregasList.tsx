@@ -16,7 +16,7 @@ export default function EntregasList() {
   const entregasFiltradas =
     filtro === "Todos"
       ? entregas
-      : entregas.filter((e) => e.estado === filtro);
+      : entregas.filter((e: any) => e.estado === filtro);
 
 
   return (
@@ -52,7 +52,7 @@ export default function EntregasList() {
       {/* LISTA */}
       <div className="grid grid-cols-1 md:grid-cols-2 xl:grid-cols-3 gap-4">
 
-        {entregasFiltradas.map((entrega) => (
+        {entregasFiltradas.map((entrega: any) => (
 
           <EntregaCard
             key={entrega.id}
